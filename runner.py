@@ -1,5 +1,6 @@
 #! python3
-
+import random
+import os
 #Here's what we have to do.
 
 #Have a class that defines the x and y of the player.
@@ -13,6 +14,12 @@
 #only if it passes these tests, change the location of the character
 
 #Todo: Build a fucking class.
+
+def cls():
+    try:
+        os.system('cls')
+    except RuntimeError:
+        os.system('clear')
 
 class Peep:
     def __init__(self,x,y):
@@ -61,6 +68,21 @@ def isEmpty(x,y):
         return False
     else:
         return True
+iX = 0
+iY = 0
+while True:
+    iX = random.randint(0,37)
+    iY = random.randint(0,23)
+    if isEmpty(iX,iY):
+        break
+    else:
+        continue
 
+p = Peep(iX,iY)
 
+#Yay, everything is set up.
+#Now, you need to:
+#   print the maze and the prompt
+#   flush the screen every single time the control is updated.
+#   every time the X moves, clear the current position, and then put the new guy in the new position
 
