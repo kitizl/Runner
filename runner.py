@@ -28,11 +28,11 @@ class Peep:
     def move(self,ky):
         if(ky=='w'):
             self.y-=1
-        if(ky=='a'):
+        elif(ky=='a'):
             self.x-=1
-        if(ky=='s'):
+        elif(ky=='s'):
             self.y+=1
-        if(ky=='d'):
+        elif(ky=='d'):
             self.x+=1
         else:
             print("Illegal input. Cannot move character.")
@@ -64,15 +64,15 @@ MAZE = [list("#####################################"),
         list("# ###################################")]
 
 def isEmpty(x,y):
-    if(MAZE[x][y]=='#'):
+    if(MAZE[y][x]=='#'):
         return False
     else:
         return True
 iX = 0
 iY = 0
 while True:
-    iX = random.randint(0,37)
-    iY = random.randint(0,23)
+    iX = random.randint(0,36)
+    iY = random.randint(0,22)
     if isEmpty(iX,iY):
         break
     else:
@@ -85,4 +85,30 @@ p = Peep(iX,iY)
 #   print the maze and the prompt
 #   flush the screen every single time the control is updated.
 #   every time the X moves, clear the current position, and then put the new guy in the new position
+
+
+def insG(X,Y):
+    MAZE[Y][X] = " "
+    MAZE[p.y][p.x] = "X"
+def printMaze():
+    for i in MAZE:
+        for j in i:
+            print(j,end='')
+        print()
+
+control = ""
+insG(iX,iY)
+while(control != "quit"):
+    cls()
+    printMaze()
+    control=input("enter command:[w,a,s,d,quit]  ")
+    X = p.x
+    Y = p.y
+    p.move(control)
+    if not isEmpty(p.x,p.y):
+        p.x = X
+        p.y = Y
+        print("INVALID MOVE")
+    insG(X,Y)
+
 
